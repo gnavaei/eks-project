@@ -33,9 +33,9 @@ module "external_secrets_irsa" {
   namespace            = "external-secrets"
   service_account_name = "external-secrets"
 
- oidc_provider_arn = module.eks.oidc_provider_arn
- oidc_provider_url = module.eks.oidc_provider_url
- 
+  oidc_provider_arn = module.eks.oidc_provider_arn
+  oidc_provider_url = module.eks.oidc_provider_url
+
 }
 
 resource "aws_iam_policy" "external_secrets" {
