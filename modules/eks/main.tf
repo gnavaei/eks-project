@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 resource "aws_iam_role" "eks_cluster" {
   name = "eks-cluster-role"
 
