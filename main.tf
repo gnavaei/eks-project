@@ -61,3 +61,11 @@ resource "aws_iam_role_policy_attachment" "external_secrets" {
   role       = module.external_secrets_irsa.role_name
   policy_arn = aws_iam_policy.external_secrets.arn
 }
+
+module "karpenter" {
+  source = "./modules/karpenter"
+
+  cluster_name      = module.eks.cluster_name
+  oidc_provider_arn = module.eks.oidc_provider_arn
+  oidc_provider_url = module.eks.oidc_provider_url
+}

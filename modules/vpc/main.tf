@@ -99,6 +99,7 @@ resource "aws_subnet" "private_a" {
 
     "kubernetes.io/cluster/eks-project" = "shared"
     "kubernetes.io/role/internal-elb"   = "1"
+    "karpenter.sh/discovery"            = "eks-project"
   }
 }
 
@@ -113,6 +114,7 @@ resource "aws_subnet" "private_b" {
 
     "kubernetes.io/cluster/eks-project" = "shared"
     "kubernetes.io/role/internal-elb"   = "1"
+    "karpenter.sh/discovery"            = "eks-project"
   }
 }
 
@@ -127,6 +129,7 @@ resource "aws_subnet" "private_c" {
 
     "kubernetes.io/cluster/eks-project" = "shared"
     "kubernetes.io/role/internal-elb"   = "1"
+    "karpenter.sh/discovery"            = "eks-project"
   }
 }
 
