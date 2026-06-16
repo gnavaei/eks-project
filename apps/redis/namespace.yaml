@@ -3,12 +3,4 @@ kind: Namespace
 
 metadata:
   name: redis
-  namespace: redis
-
-spec:
-  selector:
-    app: redis
-
-    ports:
-    - port: 6379
-      targetPort: 6379
+  

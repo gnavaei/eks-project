@@ -74,7 +74,9 @@ resource "aws_iam_policy" "karpenter" {
         Effect = "Allow"
 
         Action = [
-          "ec2:CreateLaunchTemplate"
+          "ec2:CreateLaunchTemplate",
+          "ec2:CreateTags",
+          "ec2:CreateFleet"
         ]
 
         Resource = "*"

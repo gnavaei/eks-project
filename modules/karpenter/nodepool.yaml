@@ -33,6 +33,9 @@ spec:
           values:
             - t3.medium
             - t3.large
+            - t3.xlarge
+            - m5.large
+            - m5.xlarge
 
   limits:
     cpu: "10"
