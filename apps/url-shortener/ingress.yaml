@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: url-shortener
+  namespace: url-shortener
+
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: eks.gnavaei.com
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+
+spec:
+  ingressClassName: nginx
+
+  tls:
+    - hosts:
+        - eks.gnavaei.com
+      secretName: eks-gnavaei-com-tls
+
+  rules:
+    - host: eks.gnavaei.com
+
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+
+            backend:
+              service:
+                name: url-shortener
+
+                port:
+                  number: 80
