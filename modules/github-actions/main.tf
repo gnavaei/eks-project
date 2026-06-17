@@ -4,25 +4,27 @@ resource "aws_iam_role" "github_actions" {
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
 
-    Statement = [{
-      Effect = "Allow"
+    Statement = [
+      {
+        Effect = "Allow"
 
-      Principal = {
-        Federated = "arn:aws:iam::397348547008:oidc-provider/token.actions.githubusercontent.com"
-      }
-
-      Action = "sts:AssumeRoleWithWebIdentity"
-
-      Condition = {
-        StringEquals = {
-          "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
+        Principal = {
+          Federated = "arn:aws:iam::397348547008:oidc-provider/token.actions.githubusercontent.com"
         }
 
-        StringLike = {
-          "token.actions.githubusercontent.com:sub" = "repo:${var.github_owner}/${var.github_repo}:*"
+        Action = "sts:AssumeRoleWithWebIdentity"
+
+        Condition = {
+          StringEquals = {
+            "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
+          }
+
+          StringLike = {
+            "token.actions.githubusercontent.com:sub" = "repo:${var.github_owner}/${var.github_repo}:*"
+          }
         }
       }
-    }]
+    ]
   })
 }
 
@@ -56,6 +58,32 @@ resource "aws_iam_policy" "github_actions_ecr" {
         ]
 
         Resource = "arn:aws:ecr:eu-west-2:397348547008:repository/eks-app"
+      },
+
+      {
+        Effect = "Allow"
+
+        Action = [
+          "s3:ListBucket"
+        ]
+
+        Resource = [
+          "arn:aws:s3:::eks-project-tfstate-gi"
+        ]
+      },
+
+      {
+        Effect = "Allow"
+
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject"
+        ]
+
+        Resource = [
+          "arn:aws:s3:::eks-project-tfstate-gi/*"
+        ]
       }
     ]
   })
