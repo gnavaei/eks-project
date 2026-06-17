@@ -67,9 +67,7 @@ resource "aws_iam_policy" "github_actions_ecr" {
           "s3:ListBucket"
         ]
 
-        Resource = [
-          "arn:aws:s3:::eks-project-tfstate-gi"
-        ]
+        Resource = "arn:aws:s3:::eks-project-tfstate-gi"
       },
 
       {
@@ -81,15 +79,30 @@ resource "aws_iam_policy" "github_actions_ecr" {
           "s3:DeleteObject"
         ]
 
-        Resource = [
-          "arn:aws:s3:::eks-project-tfstate-gi/*"
+        Resource = "arn:aws:s3:::eks-project-tfstate-gi/*"
+      },
+
+      {
+        Effect = "Allow"
+
+        Action = [
+          "iam:GetRole",
+          "iam:GetPolicy",
+          "iam:GetPolicyVersion",
+          "iam:ListAttachedRolePolicies",
+          "iam:ListRolePolicies",
+          "ec2:Describe*",
+          "eks:DescribeCluster",
+          "eks:ListClusters"
         ]
+
+        Resource = "*"
       }
     ]
   })
 }
 
-resource "aws_iam_role_policy_attachment" "github_actions" {
+resource "aws_iam_role_policy_attachment" "github_actions_ecr" {
   role       = aws_iam_role.github_actions.name
   policy_arn = aws_iam_policy.github_actions_ecr.arn
 }
