@@ -76,3 +76,10 @@ module "external_dns" {
   oidc_provider_arn = module.eks.oidc_provider_arn
   oidc_provider_url = module.eks.oidc_provider_url
 }
+
+module "github_actions" {
+  source = "./modules/github-actions"
+
+  github_owner = "gnavaei"
+  github_repo  = "eks-project"
+}
