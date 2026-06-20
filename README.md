@@ -1,7 +1,7 @@
 Production-Grade Cloud Platform on Amazon EKS
 
 
-Project Overview:
+## Project Overview:
 
 This project demonstrates the design and implementation of a production-ready cloud platform on Amazon EKS, built to replicate the core capabilities of a modern cloud-native environment.
 
@@ -11,8 +11,7 @@ The primary objective was to develop an end-to-end cloud-native platform capable
 
 Constructed as a production-inspired environment, it provides dynamic scaling, automated DNS and TLS management, integrated security scanning, and end-to-end observability, demonstrating how scalable, secure, and reliable applications can be operated on AWS.
 
-Core Components:
-### Core Components
+## Core Components
 
 - Amazon EKS for container orchestration
 - Terraform for Infrastructure as Code
@@ -99,7 +98,7 @@ Key infrastructure resources provisioned through Terraform included:
 
 Terraform state was stored remotely in Amazon S3, providing centralised state management and enabling consistent infrastructure lifecycle operations.
 
-### Terraform Module Structure
+## Terraform Module Structure
 
 Infrastructure was organised into dedicated Terraform modules to separate responsibilities and simplify maintenance:
 
@@ -131,7 +130,7 @@ The workflow performs the following steps:
 
 This automated workflow ensures that application images are consistently built, validated, and stored within a central container registry before deployment.
 
-### Infrastructure Quality Gates
+## Infrastructure Quality Gates
 
 A separate GitHub Actions workflow was implemented to validate Infrastructure as Code changes before deployment.
 
@@ -151,7 +150,7 @@ ArgoCD continuously monitored the Git repository for changes and ensured that th
 
 The application manifests were stored within the repository and synchronised to Amazon EKS through ArgoCD. When changes were committed to GitHub, ArgoCD automatically detected the updates and reconciled the cluster to the latest desired configuration.
 
-### GitOps Workflow
+## GitOps Workflow
 
 1. Changes are committed and pushed to GitHub
 2. ArgoCD detects repository updates
@@ -161,7 +160,7 @@ The application manifests were stored within the repository and synchronised to 
 
 This approach ensured that the Git repository remained the single source of truth for Kubernetes deployments, improving consistency, traceability, and operational reliability.
 
-### Security
+## Security
 
 Security was integrated throughout the platform using secure authentication, automated validation, and encrypted communication.
 
