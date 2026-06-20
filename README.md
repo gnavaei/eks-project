@@ -1,5 +1,4 @@
-Production-Grade Cloud Platform on Amazon EKS
-
+### Production-Grade Cloud Platform on Amazon EKS
 
 ## Project Overview:
 
