@@ -21,9 +21,13 @@ Constructed as a production-inspired environment, it provides dynamic scaling, a
 - ExternalDNS for automated Route53 record management
 - cert-manager for automated TLS certificate issuance
 - Prometheus and Grafana for monitoring and observability
+
+ ## Application Deployment
   
-- The application is accessible through a custom domain secured with HTTPS:
+  - The application is accessible through a custom domain secured with HTTPS:
 https://eks.gnavaei.com
+
+![Application](screenshots/01-application.png)
 
 Architecture Overview:
 
@@ -117,6 +121,8 @@ The platform uses OpenID Connect (OIDC) federation to securely authenticate GitH
 
 ### Application Deployment Workflow
 
+![Deployment](screenshots/03-github-actions-deploy.png)
+
 The application deployment pipeline is triggered when changes are pushed to the repository.
 
 The workflow performs the following steps:
@@ -131,6 +137,8 @@ This automated workflow ensures that application images are consistently built, 
 
 ## Infrastructure Quality Gates
 
+![Terraform Pipeline](screenshots/04-github-actions-terraform.png)
+
 A separate GitHub Actions workflow was implemented to validate Infrastructure as Code changes before deployment.
 
 The workflow performs:
@@ -141,7 +149,10 @@ The workflow performs:
 4. Checkov security scanning
 
 This approach helps identify configuration errors and security misconfigurations early in the development lifecycle.
+
 ## GitOps Deployment
+
+![ArgoCD](screenshots/02-argocd.png)
 
 Application deployments were managed using ArgoCD, enabling a GitOps-based approach to Kubernetes application delivery.
 
@@ -168,6 +179,9 @@ GitHub Actions authenticated with AWS using OpenID Connect (OIDC), eliminating t
 External traffic was secured using HTTPS, with Cert Manager automating TLS certificate provisioning and renewal through Let's Encrypt.
 
 ## Monitoring & Observability
+
+![Grafana Dashboard](screenshots/05-grafana-node-metrics.png)
+![Prometheus Overview](screenshots/06-prometheus-overview.png)
 
 Platform observability was implemented using Prometheus and Grafana, providing real-time visibility into cluster health, resource utilisation, and application performance.
 Metrics were collected from Kubernetes nodes and workloads, enabling monitoring of CPU, memory, networking, and pod-level activity. Grafana dashboards were used to visualise operational metrics and support troubleshooting, capacity planning, and platform health monitoring.
