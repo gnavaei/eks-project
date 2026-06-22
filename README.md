@@ -127,16 +127,6 @@ The application manifests were stored within the repository and synchronised to 
 
 When changes were committed to GitHub, ArgoCD automatically detected the updates and reconciled the cluster to the latest desired configuration.
 
-## GitOps Workflow
-
-1. Changes are committed and pushed to GitHub
-2. ArgoCD detects repository updates
-3. Kubernetes manifests are synchronised
-4. Amazon EKS is updated to the desired state
-5. ArgoCD continuously monitors for configuration drift
-
-This approach ensured that the Git repository remained the single source of truth for Kubernetes deployments, improving consistency, traceability, and operational reliability.
-
 ## Security
 
 Security was integrated throughout the platform using secure authentication, automated validation, and encrypted communication.
@@ -146,6 +136,7 @@ GitHub Actions authenticated with AWS using OpenID Connect (OIDC), eliminating t
 External traffic was secured using HTTPS, with Cert Manager automating TLS certificate provisioning and renewal through Let's Encrypt.
 
 ## Monitoring & Observability
+
 <p align="center">
   <img src="screenshots/05-grafana-node-metrics.png" width="650">
 </p>
@@ -162,11 +153,12 @@ Grafana dashboards were used to visualise operational metrics and support troubl
 
 ## Project Outcomes
 
-The project successfully delivered a fully automated cloud-native platform where infrastructure provisioning, application deployment, security validation, scaling, and observability were managed through code and automated workflows.
+The project successfully delivered a fully automated cloud-native platform capable of provisioning infrastructure, deploying applications, and managing operational workflows through code.
 
-Beyond the technical implementation, the project provided valuable experience in integrating multiple cloud-native components into a single operational platform. Challenges included establishing secure workload identity federation with AWS, implementing GitOps-based deployments, troubleshooting Kubernetes networking and ingress behaviour, and ensuring platform observability across both infrastructure and workloads.
+The most significant challenge was integrating multiple platform components into a cohesive and reliable environment. While each service could be deployed independently, ensuring that application delivery, networking, security, scaling, and observability worked seamlessly together required continuous troubleshooting, testing, and refinement across the platform.
 
-The result is a scalable and repeatable platform that reflects many of the operational patterns used in modern cloud environments while strengthening practical skills in Kubernetes, automation, troubleshooting, and platform engineering.
+The result is a scalable and repeatable environment that strengthened practical experience in Kubernetes and Platform Engineering, while providing a deeper understanding of how modern cloud-native systems operate as a complete platform rather than a collection of individual tools.
+
 
 
 
