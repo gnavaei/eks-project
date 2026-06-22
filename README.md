@@ -33,54 +33,6 @@ https://eks.gnavaei.com
 
 ![Application](screenshots/01-application.png)
 
-Architecture Overview:
-
-Internet User
-       │
-       ▼
-Route53 (eks.gnavaei.com)
-       │
-       ▼
-AWS Load Balancer
-       │
-       ▼
-NGINX Ingress Controller
-       │
-       ▼
-
-┌──────────────────────────────┐
-│        Amazon EKS            │
-│                              │
-│  URL Shortener Application   │
-│  Redis                       │
-│  PostgreSQL                  │
-└──────────────────────────────┘
-
-
-GitHub Repository
-       │
-       ▼
-GitHub Actions
-(Build + Trivy)
-       │
-       ▼
-Amazon ECR
-       │
-       ▼
-ArgoCD
-       │
-       ▼
-Amazon EKS
-
-
-ExternalDNS ───► Route53
-
-Cert Manager ──► Let's Encrypt
-
-Karpenter ─────► EC2 Worker Nodes
-
-Prometheus ────► Grafana
-
 ## Infrastructure Provisioning
 
 The platform infrastructure was provisioned using Terraform, enabling a fully repeatable, version-controlled, and automated deployment process.
