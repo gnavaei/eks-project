@@ -10,6 +10,10 @@ The primary objective was to develop an end-to-end cloud-native platform capable
 
 Constructed as a production-inspired environment, it provides dynamic scaling, automated DNS and TLS management, integrated security scanning, and end-to-end observability, demonstrating how scalable, secure, and reliable applications can be operated on AWS.
 
+## Architecture Overview
+
+![Architecture Diagram](screenshots/wworkflow.png)
+
 ## Core Components
 
 - Amazon EKS for container orchestration
