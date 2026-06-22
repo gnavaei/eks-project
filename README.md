@@ -32,7 +32,9 @@ Constructed as a production-inspired environment, it provides dynamic scaling, a
   - The application is accessible through a custom domain secured with HTTPS:
 https://eks.gnavaei.com
 
-![Application](screenshots/01-application.png)
+<p align="center">
+  <img src="screenshots/01-application.png" width="650">
+</p>
 
 ## Infrastructure Provisioning
 
@@ -77,8 +79,8 @@ Continuous Integration and Continuous Deployment (CI/CD) was implemented using G
 The platform uses OpenID Connect (OIDC) federation to securely authenticate GitHub Actions with AWS, eliminating the need for long-lived access keys and improving overall security.
 
 ### Application Deployment Workflow
-
-![Deployment](screenshots/03-github-actions-deploy.png)
+  <img src="screenshots/03-github-actions-deploy.png" width="650">
+</p>
 
 The application deployment pipeline is triggered when changes are pushed to the repository.
 
@@ -94,7 +96,8 @@ This automated workflow ensures that application images are consistently built, 
 
 ## Infrastructure Quality Gates
 
-![Terraform Pipeline](screenshots/04-github-actions-terraform.png)
+<img src="screenshots/04-github-actions-terraform.png" width="650">
+</p>
 
 A separate GitHub Actions workflow was implemented to validate Infrastructure as Code changes before deployment.
 
@@ -108,9 +111,9 @@ The workflow performs:
 This approach helps identify configuration errors and security misconfigurations early in the development lifecycle.
 
 ## GitOps Deployment
-
-![ArgoCD](screenshots/02-argocd.png)
-
+<img src="screenshots//02-argocd.png" width="650">
+</p
+  
 Application deployments were managed using ArgoCD, enabling a GitOps-based approach to Kubernetes application delivery.
 
 ArgoCD continuously monitored the Git repository for changes and ensured that the running state of the cluster matched the desired state defined within version control. This provided automated deployment, drift detection, and self-healing capabilities without requiring manual intervention within the cluster.
@@ -137,8 +140,10 @@ External traffic was secured using HTTPS, with Cert Manager automating TLS certi
 
 ## Monitoring & Observability
 
-![Grafana Dashboard](screenshots/05-grafana-node-metrics.png)
-![Prometheus Overview](screenshots/06-prometheus-overview.png)
+<img src="screenshots//05-grafana-node-metrics.png" width="650">
+</p
+<img src="screenshots//06-prometheus-overview.png" width="650">
+</p
 
 Platform observability was implemented using Prometheus and Grafana, providing real-time visibility into cluster health, resource utilisation, and application performance.
 Metrics were collected from Kubernetes nodes and workloads, enabling monitoring of CPU, memory, networking, and pod-level activity. Grafana dashboards were used to visualise operational metrics and support troubleshooting, capacity planning, and platform health monitoring.
