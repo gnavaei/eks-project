@@ -8,8 +8,10 @@ The platform leverages Terraform, GitHub Actions, ArgoCD, Karpenter, ExternalDNS
 
 ## Architecture Overview
 <p align="center">
-  <img src="screenshots/wworkflow.png" width="650">
+  <img src="screenshots/wworkflow.png" width="500">
 </p>
+
+A cloud-native platform combining Infrastructure as Code, GitOps, CI/CD, and Kubernetes automation to manage containerised applications on AWS.
 
 ## Platform Components
 
