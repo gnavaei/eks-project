@@ -2,20 +2,16 @@
 
 ## Project Overview:
 
-This project demonstrates the design and implementation of a production-ready cloud platform on Amazon EKS, built to replicate the core capabilities of a modern cloud-native environment.
+End-to-end cloud-native platform built on Amazon EKS, integrating Infrastructure as Code, GitOps, CI/CD automation, security, and observability into a single deployment workflow.
 
-The platform illustrates the automation of infrastructure provisioning, application delivery, security, scaling, and observability through the integration of Terraform, GitHub Actions, ArgoCD, and Kubernetes-native tooling.
-
-The primary objective was to develop an end-to-end cloud-native platform capable of hosting and operating containerised applications through the application of industry-standard DevOps and Platform Engineering practices. Application delivery follows a GitOps approach, enabling declarative, auditable, and automated deployments directly from source control.
-
-Constructed as a production-inspired environment, it provides dynamic scaling, automated DNS and TLS management, integrated security scanning, and end-to-end observability, demonstrating how scalable, secure, and reliable applications can be operated on AWS.
+The platform leverages Terraform, GitHub Actions, ArgoCD, Karpenter, ExternalDNS, cert-manager, Prometheus, and Grafana to automate the provisioning, deployment, scaling, and monitoring of containerised applications on AWS.
 
 ## Architecture Overview
 <p align="center">
- <img src="screenshots/wworkflow.png" width="650">
+  <img src="screenshots/wworkflow.png" width="650">
 </p>
 
-## production-style cloud platform
+## Platform Components
 
 - Amazon EKS for container orchestration
 - Terraform for Infrastructure as Code
@@ -27,14 +23,16 @@ Constructed as a production-inspired environment, it provides dynamic scaling, a
 - cert-manager for automated TLS certificate issuance
 - Prometheus and Grafana for monitoring and observability
 
- ## Application Deployment
-  
-  - The application is accessible through a custom domain secured with HTTPS:
-https://eks.gnavaei.com
+ ## Application Deployment Workflow
 
 <p align="center">
  <img src="screenshots/01-application.png" width="650">
 </p>
+
+The platform uses a GitOps workflow where infrastructure and application changes are automatically validated, deployed, and managed through code. Supporting services provide DNS automation, TLS management, autoscaling, and observability.
+
+- The application is accessible through a custom domain secured with HTTPS:
+https://eks.gnavaei.com
 
 ## Infrastructure Provisioning
 
@@ -64,11 +62,11 @@ Terraform state was stored remotely in Amazon S3, providing centralised state ma
 
 Infrastructure was organised into dedicated Terraform modules to separate responsibilities and simplify maintenance:
 
-- VPC Module – networking resources and routing
-- EKS Module – cluster and node group provisioning
-- Karpenter Module – dynamic node provisioning resources
-- ExternalDNS Module – DNS automation permissions
-- GitHub Actions Module – OIDC federation and CI/CD permissions
+- VPC
+- EKS
+- Karpenter
+- ExternalDNS
+- GitHub Actions (OIDC)
 
 This modular structure improved reusability and reduced complexity as the platform evolved.
 
@@ -79,10 +77,6 @@ Continuous Integration and Continuous Deployment (CI/CD) was implemented using G
 The platform uses OpenID Connect (OIDC) federation to securely authenticate GitHub Actions with AWS, eliminating the need for long-lived access keys and improving overall security.
 
 ### Application Deployment Workflow
-<p align="center">
- <img src="screenshots/03-github-actions-deploy.png" width="650">
-</p>
-
 The application deployment pipeline is triggered when changes are pushed to the repository.
 
 The workflow performs the following steps:
@@ -97,7 +91,7 @@ This automated workflow ensures that application images are consistently built, 
 
 ## Infrastructure Quality Gates
 <p align="center">
- <img src="screenshots/04-github-actions-terraform.png" width="650">
+ <img src="screenshots/03-github-actions-deploy.png" width="650">
 </p>
 
 A separate GitHub Actions workflow was implemented to validate Infrastructure as Code changes before deployment.
@@ -111,16 +105,25 @@ The workflow performs:
 
 This approach helps identify configuration errors and security misconfigurations early in the development lifecycle.
 
-## GitOps Deployment
 <p align="center">
-  <img src="screenshots//02-argocd.png" width="650">
-</p
-  
+  <img src="screenshots/04-github-actions-terraform.png" width="650">
+</p>
+
+## GitOps Deployment
+
+<p align="center">
+  <img src="screenshots/02-argocd.png" width="650">
+</p>
+
 Application deployments were managed using ArgoCD, enabling a GitOps-based approach to Kubernetes application delivery.
 
-ArgoCD continuously monitored the Git repository for changes and ensured that the running state of the cluster matched the desired state defined within version control. This provided automated deployment, drift detection, and self-healing capabilities without requiring manual intervention within the cluster.
+ArgoCD continuously monitored the Git repository for changes and ensured that the running state of the cluster matched the desired state defined within version control. 
 
-The application manifests were stored within the repository and synchronised to Amazon EKS through ArgoCD. When changes were committed to GitHub, ArgoCD automatically detected the updates and reconciled the cluster to the latest desired configuration.
+This provided automated deployment, drift detection, and self-healing capabilities without requiring manual intervention within the cluster.
+
+The application manifests were stored within the repository and synchronised to Amazon EKS through ArgoCD.
+
+When changes were committed to GitHub, ArgoCD automatically detected the updates and reconciled the cluster to the latest desired configuration.
 
 ## GitOps Workflow
 
@@ -142,19 +145,28 @@ External traffic was secured using HTTPS, with Cert Manager automating TLS certi
 
 ## Monitoring & Observability
 <p align="center">
- <img src="screenshots//05-grafana-node-metrics.png" width="650">
-</p
-<p align="center">  
- <img src="screenshots//06-prometheus-overview.png" width="650">
-</p
+  <img src="screenshots/05-grafana-node-metrics.png" width="650">
+</p>
+
+<p align="center">
+  <img src="screenshots/06-prometheus-overview.png" width="650">
+</p>
 
 Platform observability was implemented using Prometheus and Grafana, providing real-time visibility into cluster health, resource utilisation, and application performance.
-Metrics were collected from Kubernetes nodes and workloads, enabling monitoring of CPU, memory, networking, and pod-level activity. Grafana dashboards were used to visualise operational metrics and support troubleshooting, capacity planning, and platform health monitoring.
+
+Metrics were collected from Kubernetes nodes and workloads, enabling monitoring of CPU, memory, networking, and pod-level activity.
+
+Grafana dashboards were used to visualise operational metrics and support troubleshooting, capacity planning, and platform health monitoring.
 
 ## Project Outcomes
-This project demonstrates the implementation of a production-inspired cloud-native platform on Amazon EKS using modern DevOps and Platform Engineering practices.
 
-The platform integrates Infrastructure as Code, GitOps, CI/CD automation, security validation, automated scaling, DNS and TLS management, and observability into a single end-to-end deployment workflow. By leveraging Terraform, GitHub Actions, ArgoCD, Karpenter, Prometheus, and Grafana, the environment provides a scalable, secure, and repeatable foundation for running containerised workloads on AWS.
+The project successfully delivered a fully automated cloud-native platform where infrastructure provisioning, application deployment, security validation, scaling, and observability were managed through code and automated workflows.
+
+Beyond the technical implementation, the project provided valuable experience in integrating multiple cloud-native components into a single operational platform. Challenges included establishing secure workload identity federation with AWS, implementing GitOps-based deployments, troubleshooting Kubernetes networking and ingress behaviour, and ensuring platform observability across both infrastructure and workloads.
+
+The result is a scalable and repeatable platform that reflects many of the operational patterns used in modern cloud environments while strengthening practical skills in Kubernetes, automation, troubleshooting, and platform engineering.
+
+
 
 
 
