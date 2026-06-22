@@ -12,10 +12,10 @@ Constructed as a production-inspired environment, it provides dynamic scaling, a
 
 ## Architecture Overview
 <p align="center">
-  <img src="screenshots/wworkflow.png" width="650">
+ <img src="screenshots/wworkflow.png" width="650">
 </p>
 
-## Core Components
+## production-style cloud platform
 
 - Amazon EKS for container orchestration
 - Terraform for Infrastructure as Code
@@ -33,7 +33,7 @@ Constructed as a production-inspired environment, it provides dynamic scaling, a
 https://eks.gnavaei.com
 
 <p align="center">
-  <img src="screenshots/01-application.png" width="650">
+ <img src="screenshots/01-application.png" width="650">
 </p>
 
 ## Infrastructure Provisioning
@@ -79,7 +79,8 @@ Continuous Integration and Continuous Deployment (CI/CD) was implemented using G
 The platform uses OpenID Connect (OIDC) federation to securely authenticate GitHub Actions with AWS, eliminating the need for long-lived access keys and improving overall security.
 
 ### Application Deployment Workflow
-  <img src="screenshots/03-github-actions-deploy.png" width="650">
+<p align="center">
+ <img src="screenshots/03-github-actions-deploy.png" width="650">
 </p>
 
 The application deployment pipeline is triggered when changes are pushed to the repository.
@@ -95,8 +96,8 @@ The workflow performs the following steps:
 This automated workflow ensures that application images are consistently built, validated, and stored within a central container registry before deployment.
 
 ## Infrastructure Quality Gates
-
-<img src="screenshots/04-github-actions-terraform.png" width="650">
+<p align="center">
+ <img src="screenshots/04-github-actions-terraform.png" width="650">
 </p>
 
 A separate GitHub Actions workflow was implemented to validate Infrastructure as Code changes before deployment.
@@ -111,7 +112,8 @@ The workflow performs:
 This approach helps identify configuration errors and security misconfigurations early in the development lifecycle.
 
 ## GitOps Deployment
-<img src="screenshots//02-argocd.png" width="650">
+<p align="center">
+  <img src="screenshots//02-argocd.png" width="650">
 </p
   
 Application deployments were managed using ArgoCD, enabling a GitOps-based approach to Kubernetes application delivery.
@@ -139,20 +141,20 @@ GitHub Actions authenticated with AWS using OpenID Connect (OIDC), eliminating t
 External traffic was secured using HTTPS, with Cert Manager automating TLS certificate provisioning and renewal through Let's Encrypt.
 
 ## Monitoring & Observability
-
-<img src="screenshots//05-grafana-node-metrics.png" width="650">
+<p align="center">
+ <img src="screenshots//05-grafana-node-metrics.png" width="650">
 </p
-<img src="screenshots//06-prometheus-overview.png" width="650">
+<p align="center">  
+ <img src="screenshots//06-prometheus-overview.png" width="650">
 </p
 
 Platform observability was implemented using Prometheus and Grafana, providing real-time visibility into cluster health, resource utilisation, and application performance.
 Metrics were collected from Kubernetes nodes and workloads, enabling monitoring of CPU, memory, networking, and pod-level activity. Grafana dashboards were used to visualise operational metrics and support troubleshooting, capacity planning, and platform health monitoring.
 
 ## Project Outcomes
+This project demonstrates the implementation of a production-inspired cloud-native platform on Amazon EKS using modern DevOps and Platform Engineering practices.
 
-This project successfully delivered a cloud-native application platform on Amazon EKS using modern DevOps and Platform Engineering practices.
-The platform demonstrated Infrastructure as Code through Terraform, automated application delivery through GitHub Actions and ArgoCD, secure external access through automated TLS certificate management, dynamic node provisioning with Karpenter, and operational visibility through Prometheus and Grafana.
-By combining IaC, GitOps, CI/CD, security validation, monitoring, and cloud-native infrastructure, the project provided a practical implementation of a production-inspired Kubernetes platform that can be consistently deployed, managed, and scaled through code.
+The platform integrates Infrastructure as Code, GitOps, CI/CD automation, security validation, automated scaling, DNS and TLS management, and observability into a single end-to-end deployment workflow. By leveraging Terraform, GitHub Actions, ArgoCD, Karpenter, Prometheus, and Grafana, the environment provides a scalable, secure, and repeatable foundation for running containerised workloads on AWS.
 
 
 
